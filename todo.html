@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Character encoding-->
+        <meta charset="utf-8">
+        <meta name="author" content="Antoine M.">
+        <meta name="description" content="ToDo List">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>To Do App</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="dependencies/todoList.css">
+        <script src="dependencies/scripts.js"></script>
+    </head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-clipboard-list"></i> Todo List</h1>
+
+        <h3 id="sub"></h3>
+        <script>
+            updateSubtitle();
+        </script>
+        <!-- Task form and filter button-->
+        <div class = "container-md">
+            <div class="row">
+                <div class="col-sm">
+                    <!-- ADD A TASK -->
+                    <div id="task-form"></div>
+                    <script> displayTaskForm() </script>
+                </div>
+                <div class="col-sm">
+                    <!-- Filter button menu-->
+                    <div class="btn-group" role="group" aria-label="Group with 2 dropdown buttons">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-filter"></i> Filter
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" onclick="setFilter('Done only')"><i class="fas fa-check"></i> Done only</a>
+                                <a class="dropdown-item" onclick="setFilter('Not done only')"><i class="fas fa-times"></i> Not done only</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick="setFilter('')">No filter</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Order button menu-->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-sort"></i> Sort
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" onclick="setOrder('Increasing order')"><i class="fas fa-sort-alpha-down"></i> Increasing order</a>
+                                <a class="dropdown-item" onclick="setOrder('Decreasing order')"><i class="fas fa-sort-alpha-down"></i> Decreasing order</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- Ordering and Filtering stuff -->
+                    <p id="filter-selected"><div id="filter-name" style="display: none;"></div></p>
+                    <script>
+                        displayFilter()
+                    </script>
+                    <div id="sort-type" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Table with tasks -->
+        <div class="container-md ctmd-style">
+            <div class="row">
+                <div class="col-sm"><b>Status</b></div>
+                <div class="col-sm"><b>Name</b></div>
+                <div class="col-sm"><b>Change status</b></div>
+                <div class="col-sm"><b>Edit</b></div>
+            </div>
+            <hr>
+            <div id="tasks"></div>
+            <script>
+                displayTasks();
+            </script>
+        </div>
+        <div class="container-md imp-ex">
+            <div class="row">
+                <div class="col-sm">
+                    <!--Import file-->
+                    <input type="file" id="input-file" accept=".json">
+                    <script>addEventListenerInputFile()</script>
+                    <button class="btn btn-secondary btn-lg" type="button" id="inputGroupFileAddon03" onclick="importList()"><i class="fas fa-upload"></i> Import</button>
+
+                    <!-- Serve to read file content but won't be used-->
+                    <div id="file-content" style="display: none;"></div>
+                </div>
+                <div class="col-sm">
+                    <!-- Export -->
+                    <button type="button" class="btn btn-secondary btn-lg" onclick="exportList()"><i class="fas fa-download"></i> Export</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Scripts for bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+</body>
