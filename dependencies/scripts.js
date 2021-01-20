@@ -5,7 +5,7 @@ class Task {
 
     constructor(name, status, id) {
         this.name = name;
-        this.status = false;
+        this.status = status;
         this.id = id
     }
 
@@ -68,6 +68,7 @@ function displayTasks() {
 
     // Loop on all tasks and add each one of them to the string representing the html
     for (let i = 0; i < tasks.length; i++) {
+		console.log(tasks[i]);
         if (checkFilter(tasks[i], filterName)) {
             $("#tasks").append(formatTask(tasks[i], i))
             $("#tasks").append($("<hr>"))
@@ -500,8 +501,11 @@ function importList(){
 
         // Add tasks from file to list of tasks
         for (let i = 0; i < data.length; i++) {
-            tasks.push(data[i]);
+			let newTask = new Task(data[i].name, data[i].status, tasks.length);
+            tasks.push(newTask);
+
         }
+		
 
         // Reset input file and file data
         document.getElementById("input-file").value = "";
